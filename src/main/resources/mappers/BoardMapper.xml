@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lee.web.board1.BoardMapper">
+    <select id="getBoardList" resultType="com.lee.web.board1.model.BoardVO">
+        SELECT BID, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
+        FROM TBL_BOARD
+    </select>
+
+    <select id="getBoardContent" resultType="com.lee.web.board1.model.BoardVO">
+        SELECT BID, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
+        FROM TBL_BOARD
+        WHERE BID = #{bid}
+    </select>
+
+    <insert id="insertBoard" parameterType="com.lee.web.board1.model.BoardVO">
+        INSERT INTO TBL_BOARD
+        (
+            BID,
+            TITLE,
+            CONTENT,
+            TAG,
+            VIEW_CNT,
+            REG_ID,
+            REG_DT,
+            EDIT_DT
+        )
+        VALUES
+        (
+            #{bid},
+            #{title},
+            #{content},
+            #{tag},
+            0,
+            ,#{regId}
+            now(),
+            now()
+        )
+    </insert>
+
+    <update id="updateBoard" parameterType="com.lee.web.board1.model.BoardVO">
+        UPDATE TBL_BOARD SET
+            TITLE = #{title},
+            CONTENT = #{content},
+            TAG = #{tag},
+            VIEW_CNT = #{viewCnt},
+            EDIT_ID = now()
+        WHERE
+            BID = #{bid}
+    </update>
+    
+    <delete id="deleteBoard" parameterType="int">
+        DELETE FROM TBL_BOARD WHERE BID = #{bid}
+    </delete>
+    
+    <update id="updateViewCnt" parameterType="com.lee.web.board1.model.BoardVO">
+        UPDATE TBL_BOARD SET
+            VIEW_CNT = VIEW_CNT + 1
+        WHERE
+            BID = #{bid}
+    </update>
+</mapper>
