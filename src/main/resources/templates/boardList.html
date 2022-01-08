@@ -5,6 +5,19 @@
     <title>boardList</title>
 </head>
 <body>
-
+<table>
+    <thead>
+<tr>
+    <th>title</th>
+    <th>content</th>
+</tr>
+    </thead>
+    <tbody>
+<tr th:each="list : ${boardList}">
+    <td th:text="${list.title}"></td>
+    <td th:text="${list.content}"></td>
+</tr>
+    </tbody>
+</table>
 </body>
 </html>

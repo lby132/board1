@@ -4,12 +4,16 @@ import com.lee.web.board1.model.BoardVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
 
     private SqlSession sqlSession;
+
+    private static Map<Long, BoardVO> store = new HashMap<>();
 
     public BoardDAOImpl(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
@@ -43,5 +47,9 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public int updateBoard(int bid) throws Exception {
         return sqlSession.update("com.lee.web.board1.BoardMapper.updateViewCnt", bid);
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }
