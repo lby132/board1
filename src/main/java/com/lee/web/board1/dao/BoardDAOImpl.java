@@ -26,6 +26,7 @@ public class BoardDAOImpl implements BoardDAO{
 
     @Override
     public BoardVO getBoardContent(int bid) throws Exception {
+        updateViewCnt(bid);
         return sqlSession.selectOne("com.lee.web.board1.BoardMapper.getBoardContent", bid);
     }
 
@@ -49,7 +50,10 @@ public class BoardDAOImpl implements BoardDAO{
         return sqlSession.update("com.lee.web.board1.BoardMapper.updateViewCnt", bid);
     }
 
-    public void clearStore() {
-        store.clear();
+    @Override
+    public int updateViewCnt(int bid) throws Exception {
+        return sqlSession.update("com.lee.web.board1.BoardMapper.updateViewCnt", bid);
     }
+
+
 }

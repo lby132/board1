@@ -18,4 +18,6 @@ public interface BoardDAO {
 
     public int updateBoard(int bid) throws Exception;
 
+    public int updateViewCnt(int bid) throws Exception;
+
 }

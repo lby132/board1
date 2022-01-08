@@ -7,8 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,18 +19,12 @@ import java.util.List;
 @SpringBootTest
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
 public class DaoTest {
 
     @Autowired
     private BoardDAO boardDAO;
 
     private BoardDAOImpl boardDAOImpl;
-
-    @AfterEach
-    public void afterEach() {
-        boardDAOImpl.clearStore();
-    }
 
     @Test
     public void boardList() throws Exception {
@@ -45,11 +41,11 @@ public class DaoTest {
     @Test
     public void insertBoard() throws Exception {
         BoardVO boardVO = new BoardVO();
-        boardVO.setBid(2);
-        boardVO.setTitle("2번 게시물 입니다.");
-        boardVO.setContent("2번 게시물 입니다.");
-        boardVO.setTag("2");
-        boardVO.setRegId("quddddd");
+        boardVO.setBid(1);
+        boardVO.setTitle("1번 게시물 입니다.");
+        boardVO.setContent("1번 게시물 입니다.");
+        boardVO.setTag("1");
+        boardVO.setRegId("dL");
 
         int insert = boardDAO.insertBoard(boardVO);
         if (insert > 0) {
@@ -81,13 +77,17 @@ public class DaoTest {
     @Test
     public void updateBoard() throws Exception {
         BoardVO boardVO = new BoardVO();
-        int update = boardDAO.updateBoard(1);
+
+        boardVO.setBid(1);
+        boardVO.setTitle("2-2번 게시물 입니다.");
+        boardVO.setContent("2-2번 게시물 입니다.");
+        boardVO.setTag("2-2");
+        boardVO.setRegId("qud");
+
+        int update = boardDAO.updateBoard(boardVO);
 
         if (update > 0) {
-            boardVO.setTitle("2-2번 게시물 입니다.");
-            boardVO.setContent("2-2번 게시물 입니다.");
-            boardVO.setTag("2-2");
-            boardVO.setRegId("qud");
+            log.info("수정 성공");
         }else {
             log.info("수정 실패");
         }
@@ -104,5 +104,14 @@ public class DaoTest {
         }
     }
 
+    @Test
+    public void viewCnt() throws Exception {
+        int viewCnt = boardDAO.updateViewCnt( 1);
+        if(viewCnt > 0){
+            log.info("조회수 증가 성공");
+        } else {
+            log.info("조회수 증가 실패");
+        }
+    }
 
 }

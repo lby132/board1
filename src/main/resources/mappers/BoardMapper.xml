@@ -5,14 +5,33 @@
 
 <mapper namespace="com.lee.web.board1.BoardMapper">
     <select id="getBoardList" resultType="com.lee.web.board1.model.BoardVO">
-        SELECT BID, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
-        FROM TBL_BOARD
+        SELECT
+            BID as bid,
+            TITLE as title,
+            CONTENT as content,
+            TAG as tag,
+            VIEW_CNT as viewCnt,
+            REG_ID as regId,
+            REG_DT as regDt,
+            EDIT_DT as editDt
+        FROM
+            TBL_BOARD
     </select>
 
     <select id="getBoardContent" resultType="com.lee.web.board1.model.BoardVO">
-        SELECT BID, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
-        FROM TBL_BOARD
-        WHERE BID = #{bid}
+        SELECT
+            BID as bid,
+            TITLE as title,
+            CONTENT as content,
+            TAG as tag,
+            VIEW_CNT as viewCnt,
+            REG_ID as regId,
+            REG_DT as regDt,
+            EDIT_DT as editDt
+        FROM
+            TBL_BOARD
+        WHERE
+            BID = #{bid}
     </select>
 
     <insert id="insertBoard" parameterType="com.lee.web.board1.model.BoardVO">
@@ -46,7 +65,7 @@
             CONTENT = #{content},
             TAG = #{tag},
             VIEW_CNT = #{viewCnt},
-            EDIT_ID = now()
+            EDIT_DT = now()
         WHERE
             BID = #{bid}
     </update>

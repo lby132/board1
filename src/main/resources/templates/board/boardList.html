@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>boardList</title>
+
+    <style>
+        body
+        {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+    </style>
+
+    <script>
+       $(document).on('click', '#btnWriteForm', function(e){
+		e.preventDefault();
+
+            window.location.href = 'boardForm';
+         });
+    </script>
+</head>
+<body>
+<article>
+    <div class="container">
+        <div class="table-responsive">
+            <h2>BoardList</h2>
+          <table class="table table-striped table-sm">
+                <thead>
+                    <colgroup>
+                        <col style="width:5%;" />
+                        <col style="width:auto;" />
+                        <col style="width:15%;" />
+                        <col style="width:10%;" />
+                        <col style="width:10%;" />
+                    </colgroup>
+                    <tr>
+                        <th>글번호</th>
+                        <th>제목</th>
+                        <th>내용</th>
+                        <th>조회수</th>
+                        <th>등록일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <div th:if="${#lists.isEmpty(boardList)}">
+                    <tr><td colspan="5" align="center">데이터가 없습니다.</td></tr>
+                </div>
+                <div th:if="${not #lists.isEmpty(boardList)}">
+                    <tr th:each="list : ${boardList}">
+                        <td th:text="${list.bid}"></td>
+                        <a href="#"></a>
+                        <td th:text="${list.title}"></td>
+                        <td th:text="${list.content}"></td>
+                        <td th:text="${list.viewCnt}"></td>
+                        <td th:text="${list.regDt}"></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
+        <div >
+            <button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">글쓰기</button>
+        </div>
+    </div>
+</article>
+</body>
+</html>
