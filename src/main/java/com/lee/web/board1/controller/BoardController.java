@@ -30,7 +30,7 @@ public class BoardController {
     @RequestMapping(value = "/contentBoard", method = RequestMethod.GET)
     public String contentBoard(Model model, @RequestParam("bid") int bid) throws Exception {
         model.addAttribute("boardContent", boardService.getBoardContent(bid));
-        return "board/boardContent";
+        return "board/boardForm";
     }
 
     @RequestMapping(value = "/boardForm")

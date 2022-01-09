@@ -24,6 +24,12 @@
 
             window.location.href = 'boardForm';
          });
+
+         function fn_view(bid) {
+            let url = "contentBoard";
+            url = url + "?bid=" + bid;
+            window.location.href = url;
+         }
     </script>
 </head>
 <body>
@@ -55,8 +61,7 @@
                 <div th:if="${not #lists.isEmpty(boardList)}">
                     <tr th:each="list : ${boardList}">
                         <td th:text="${list.bid}"></td>
-                        <a href="#"></a>
-                        <td th:text="${list.title}"></td>
+                        <td th:onclick="'javascript:fn_view('+${list.bid}+');'" th:text="${list.title}"></td>
                         <td th:text="${list.content}"></td>
                         <td th:text="${list.viewCnt}"></td>
                         <td th:text="${list.regDt}"></td>
