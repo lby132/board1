@@ -5,41 +5,56 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>boardForm</title>
 </head>
+<style>
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+</style>
+<script>
+    $(document).on('click','#btnList',function(e){
+        e.preventDefault();
+
+        location.href = 'getBoardList';
+    });
+
+
+    function fn_delete(bid){
+        let url = 'deleteBoard';
+        url = url + "?bid=" + bid;
+        location.href = url;
+    };
+
+    function fn_update(bid){
+        let url = 'editForm';
+        url = url + "?bid=" + bid;
+        location.href = url;
+    };
+
+
+</script>
 <body>
-<table>
-    <thead>
-    <colgroup>
-        <col style="width:5%;" />
-        <col style="width:auto;" />
-        <col style="width:15%;" />
-        <col style="width:10%;" />
-        <col style="width:10%;" />
-    </colgroup>
-    <tr>
-        <th>글번호</th>
-        <th>제목</th>
-        <th>내용</th>
-        <th>조회수</th>
-        <th>등록일</th>
-    </tr>
-    </thead>
-    <tbody>
-    <div th:if="${#lists.isEmpty(boardList)}">
-        <tr><td colspan="5" align="center">데이터가 없습니다.</td></tr>
-    </div>
-    <div th:if="${not #lists.isEmpty(boardList)}">
-        <tr th:each="list : ${boardList}">
-            <td th:text="${list.bid}"></td>
-            <td th:text="${list.title}"></td>
-            <td th:text="${list.content}"></td>
-            <td th:text="${list.viewCnt}"></td>
-            <td th:text="${list.regDt}"></td>
-        </tr>
-    </div>
-    </tbody>
-</table>
+<article>
+        <div class="container" role="main">
+            <h2>board Content</h2>
+                <div class="bg-white rounded shadow-sm">
+                    제목 <div><input type="text" name="title" th:value="${boardContent.title}"></input></div>
+                    아이디 <div><input type="text" name="regId" th:value="${boardContent.regId}"></input></div>
+                    내용 <div><textarea type="text" name="content" th:text="${boardContent.content}"></textarea></div>
+                    태그 <div><input type="text" name="tag" th:value="${boardContent.tag}"></input></div>
+                    작성날짜 <div><input type="text" name="regDt" th:value="${boardContent.regDt}" readonly="true"></input></div>
+                </div>
+            <div>
+                <button type="button" class="btn btn-sm btn-primary" th:onclick="'javascript:fn_update('+${boardContent.bid}+');'">수정</button>
+                <button type="button" class="btn btn-sm btn-primary" th:onclick="'javascript:fn_delete('+${boardContent.bid}+');'" >삭제</button>
+                <button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+            </div>
+        </div>
+</article>
 </body>
 </html>

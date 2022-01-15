@@ -41,18 +41,23 @@ public class DaoTest {
     @Test
     public void insertBoard() throws Exception {
         BoardVO boardVO = new BoardVO();
-        boardVO.setBid(1);
-        boardVO.setTitle("1번 게시물 입니다.");
-        boardVO.setContent("1번 게시물 입니다.");
+
         boardVO.setTag("1");
         boardVO.setRegId("dL");
 
-        int insert = boardDAO.insertBoard(boardVO);
-        if (insert > 0) {
-            log.info("데이터 저장 성공");
-        }else{
-            log.info("데이터 저장 실패");
+        for (int i = 0; i < 1234; i++) {
+            boardVO.setTitle(i + " 번 게시물 입니다.");
+            boardVO.setContent(i + "번 게시물 입니다.");
+            int insert = boardDAO.insertBoard(boardVO);
+
+            if (insert > 0) {
+                log.info("데이터 저장 성공");
+            }else{
+                log.info("데이터 저장 실패");
+            }
         }
+
+
     }
 
 

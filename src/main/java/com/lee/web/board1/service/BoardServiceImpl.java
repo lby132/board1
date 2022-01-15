@@ -21,12 +21,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<BoardVO> getBoardList() throws Exception {
-        log.debug("dddd");
         return boardDAO.getBoardList();
     }
 
     @Override
     public BoardVO getBoardContent(int bid) throws Exception {
+        boardDAO.updateViewCnt(bid);
         return boardDAO.getBoardContent(bid);
     }
 

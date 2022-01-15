@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>boardForm</title>
+</head>
+<style>
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+</style>
+<script>
+    $(document).on('click','#btnReset',function(e){
+        e.preventDefault();
+
+        location.href = 'getBoardContent';
+    });
+
+
+     $(document).on('click','#btnUpdate',function(e){
+        e.preventDefault();
+
+        $('#form').submit();
+    });
+
+</script>
+<body>
+<article>
+    <div class="container" role="main">
+        <h2>board Content</h2>
+        <form id="form" name="form" method="post" action="/updateBoard">
+            <div class="bg-white rounded shadow-sm">
+                <input type="hidden" name="bid" th:value="${boardContent.bid}">
+                <div>제목 : <input type="text" name="title" th:value="${boardContent.title}"></input></div>
+                <div>아이디 : <input type="text" name="regId" th:value="${boardContent.regId}"></input></div>
+                <div>내용 : <textarea type="text" name="content" th:text="${boardContent.content}"></textarea></div>
+                <div>태그 : <input type="text" name="tag" th:value="${boardContent.tag}"></input></div>
+                <div>작성날짜 : <input type="text" name="regDt" th:value="${boardContent.regDt}" readonly="true"></input></div>
+            </div>
+        </form>
+        <div>
+            <button type="button" class="btn btn-sm btn-primary" id="btnUpdate">수정완료</button>
+            <button type="button" class="btn btn-sm btn-primary" id="btnReset">취소</button>
+        </div>
+    </div>
+</article>
+</body>
+</html>

@@ -61,11 +61,13 @@
 
     <update id="updateBoard" parameterType="com.lee.web.board1.model.BoardVO">
         UPDATE TBL_BOARD SET
+            REG_ID = #{regId},
             TITLE = #{title},
             CONTENT = #{content},
             TAG = #{tag},
             VIEW_CNT = #{viewCnt},
-            EDIT_DT = now()
+            EDIT_DT = now(),
+            REG_DT = now()
         WHERE
             BID = #{bid}
     </update>
