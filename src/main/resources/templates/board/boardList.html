@@ -20,8 +20,7 @@
 
     <script>
        $(document).on('click', '#btnWriteForm', function(e){
-		e.preventDefault();
-
+	    	e.preventDefault();
             window.location.href = 'boardForm';
          });
 
@@ -30,6 +29,37 @@
             url = url + "?bid=" + bid;
             window.location.href = url;
          }
+
+         function fn_prev(page, range, rangeSize){
+            page = ((range - 2) * rangeSize) + 1;
+            range = range - 1;
+
+            let url = "${pageContext.request.contextPath}/getBoardList";
+            url = url + "?page=" + page;
+            url = url + "&range=" + range;
+
+            location.href = url;
+         }
+
+         function fn_pagination(page, range, rangeSize) {
+            let url = "getBoardList";
+            url = url + "?page=" + page;
+            url = url + "&range=" + range;
+
+            location.href = url;
+         }
+
+         function fn_next(page, range, rangeSize) {
+            page = parseInt((range*rangeSize)) + 1;
+            range = parseInt(range) + 1;
+
+            let url = "getBoardList";
+            url = url + "?page=" + page;
+            url = url + "&range=" + range;
+
+            location.href = url;
+         }
+
     </script>
 </head>
 <body>
@@ -72,6 +102,21 @@
         </div>
         <div>
             <button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">글쓰기</button>
+        </div>
+        <div id="paginationBox">
+            <ul class="pagination">
+                <th:block th:if="${#lists.isEmpty(pagination.prev)}">
+                    <li class="page-item"><a class="page-link" href="#" th:onclick="'javascript:fn_prev('+${pagination.page}+','+${pagination.range}+','+${pagination.rangeSize}+');'">Previous</a></li>
+                </th:block>
+
+                <th:block th:each="idx : ${#numbers.sequence(pagination.startList,pagination.endPage)}">
+                    <li class="page-item"><th:block th:value="${pagination.page == idx ? 'active' : ''}"/>
+                    <a class="page-link" href="#" th:onclick="'javascript:fn_pagination('+${idx}+','+${pagination.range}+','+${pagination.rangeSize}+');'"><p th:text="${idx}"></p></a></li>
+                </th:block>
+                <th:block th:if="${not #lists.isEmpty(pagination.next)}">
+                    <li class="page-item"><a class="page-link" href="#" th:onclick="'javascript:fn_next('+${pagination.page}+','+${pagination.range}+','+${pagination.rangeSize}+');'">Next</a></li>
+                </th:block>
+            </ul>
         </div>
     </div>
 </article>

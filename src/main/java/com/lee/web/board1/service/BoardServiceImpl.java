@@ -2,6 +2,7 @@ package com.lee.web.board1.service;
 
 import com.lee.web.board1.dao.BoardDAO;
 import com.lee.web.board1.model.BoardVO;
+import com.lee.web.board1.model.Pagination;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardVO> getBoardList() throws Exception {
-        return boardDAO.getBoardList();
+    public List<BoardVO> getBoardList(Pagination pagination) throws Exception {
+        return boardDAO.getBoardList(pagination);
     }
 
     @Override
@@ -53,5 +54,10 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public int updateViewCnt(int bid) throws Exception {
         return boardDAO.updateViewCnt(bid);
+    }
+
+    @Override
+    public int getBoardListCnt() throws Exception {
+        return boardDAO.getBoardListCnt();
     }
 }

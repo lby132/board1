@@ -1,6 +1,7 @@
 package com.lee.web.board1.dao;
 
 import com.lee.web.board1.model.BoardVO;
+import com.lee.web.board1.model.Pagination;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +21,8 @@ public class BoardDAOImpl implements BoardDAO{
     }
 
     @Override
-    public List<BoardVO> getBoardList() throws Exception {
-        return sqlSession.selectList("com.lee.web.board1.BoardMapper.getBoardList");
+    public List<BoardVO> getBoardList(Pagination pagination) throws Exception {
+        return sqlSession.selectList("com.lee.web.board1.BoardMapper.getBoardList", pagination);
     }
 
     @Override
@@ -53,6 +54,11 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public int updateViewCnt(int bid) throws Exception {
         return sqlSession.update("com.lee.web.board1.BoardMapper.updateViewCnt", bid);
+    }
+
+    @Override
+    public int getBoardListCnt() throws Exception {
+        return sqlSession.selectOne("com.lee.web.board1.BoardMapper.getBoardListCnt");
     }
 
 

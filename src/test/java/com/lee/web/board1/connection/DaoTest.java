@@ -3,6 +3,7 @@ package com.lee.web.board1.connection;
 import com.lee.web.board1.dao.BoardDAO;
 import com.lee.web.board1.dao.BoardDAOImpl;
 import com.lee.web.board1.model.BoardVO;
+import com.lee.web.board1.model.Pagination;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -27,8 +28,8 @@ public class DaoTest {
     private BoardDAOImpl boardDAOImpl;
 
     @Test
-    public void boardList() throws Exception {
-        List<BoardVO> boardList = boardDAO.getBoardList();
+    public void boardList(Pagination pagination) throws Exception {
+        List<BoardVO> boardList = boardDAO.getBoardList(pagination);
         if (boardList.size() > 0) {
            for (BoardVO list : boardList){
                log.info(list + " = BoardList ");

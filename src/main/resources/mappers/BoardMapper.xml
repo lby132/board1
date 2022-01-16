@@ -16,6 +16,7 @@
             EDIT_DT as editDt
         FROM
             TBL_BOARD
+        LIMIT #{startList}, #{listSize}
     </select>
 
     <select id="getBoardContent" resultType="com.lee.web.board1.model.BoardVO">
@@ -82,4 +83,12 @@
         WHERE
             BID = #{bid}
     </update>
+
+    <select id="getBoardListCnt" resultType="int">
+        SELECT
+            count(*) as listCnt
+        FROM
+            TBL_BOARD
+    </select>
+
 </mapper>

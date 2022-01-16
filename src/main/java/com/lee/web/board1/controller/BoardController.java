@@ -1,6 +1,7 @@
 package com.lee.web.board1.controller;
 
 import com.lee.web.board1.model.BoardVO;
+import com.lee.web.board1.model.Pagination;
 import com.lee.web.board1.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,15 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
-    public String getBoardList(Model model) throws Exception {
-        model.addAttribute("boardList", boardService.getBoardList());
+    public String getBoardList(Model model
+    ,@RequestParam(required = false, defaultValue = "1") int page
+    ,@RequestParam(required = false, defaultValue = "1") int range
+    ) throws Exception {
+        int listCnt = boardService.getBoardListCnt();
+
+        Pagination pagination = new Pagination(page, range, listCnt);
+        model.addAttribute("pagination" ,pagination);
+        model.addAttribute("boardList", boardService.getBoardList(pagination));
         return "board/boardList";
     }
 
@@ -59,9 +67,4 @@ public class BoardController {
         return "redirect:/getBoardList";
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public String exceptionHandler(Model model, Exception e) {
-        model.addAttribute("exception", e);
-        return "error/404error";
-    }
 }

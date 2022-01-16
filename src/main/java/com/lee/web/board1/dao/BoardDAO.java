@@ -1,12 +1,13 @@
 package com.lee.web.board1.dao;
 
 import com.lee.web.board1.model.BoardVO;
+import com.lee.web.board1.model.Pagination;
 
 import java.util.List;
 
 public interface BoardDAO {
 
-    public List<BoardVO> getBoardList() throws Exception;
+    public List<BoardVO> getBoardList(Pagination pagination) throws Exception;
 
     public BoardVO getBoardContent(int bid) throws Exception;
 
@@ -19,5 +20,7 @@ public interface BoardDAO {
     public int updateBoard(int bid) throws Exception;
 
     public int updateViewCnt(int bid) throws Exception;
+
+    public int getBoardListCnt() throws Exception;
 
 }

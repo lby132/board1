@@ -13,7 +13,6 @@ public class Pagination {
     private int range;
     private int listCnt;
     private int pageCnt;
-    private int startPage;
     private int startList;
     private int endPage;
     private boolean prev;
@@ -24,7 +23,7 @@ public class Pagination {
         this.range = range;
         this.listCnt = listCnt;
 
-        this.pageCnt = (int) Math.ceil(listCnt / listSize);
+        this.pageCnt = (int) Math.ceil((double) listCnt / listSize);
         this.endPage = range * rangeSize;
         this.startList = (page - 1) * listSize;
         this.prev = range == 1 ? false : true;
