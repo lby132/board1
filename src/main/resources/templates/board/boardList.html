@@ -109,8 +109,8 @@
                     <li class="page-item"><a class="page-link" href="#" th:onclick="'javascript:fn_prev('+${pagination.page}+','+${pagination.range}+','+${pagination.rangeSize}+');'">Previous</a></li>
                 </th:block>
 
-                <th:block th:each="idx : ${#numbers.sequence(pagination.startList,pagination.endPage)}">
-                    <li class="page-item"><th:block th:value="${pagination.page == idx ? 'active' : ''}"/>
+                <th:block th:each="idx : ${#numbers.sequence(1,pagination.endPage)}">
+                    <li class="page-item"><th:block th:classappend="${pagination.page} == idx ? active : ''"/>
                     <a class="page-link" href="#" th:onclick="'javascript:fn_pagination('+${idx}+','+${pagination.range}+','+${pagination.rangeSize}+');'"><p th:text="${idx}"></p></a></li>
                 </th:block>
                 <th:block th:if="${not #lists.isEmpty(pagination.next)}">
