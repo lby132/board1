@@ -27,6 +27,7 @@ public class BoardController {
         int listCnt = boardService.getBoardListCnt();
 
         Pagination pagination = new Pagination(page, range, listCnt);
+
         model.addAttribute("pagination" ,pagination);
         model.addAttribute("boardList", boardService.getBoardList(pagination));
         return "board/boardList";

@@ -2,9 +2,11 @@ package com.lee.web.board1.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Pagination {
 
     private int listSize = 10;
@@ -13,6 +15,7 @@ public class Pagination {
     private int range;
     private int listCnt;
     private int pageCnt;
+    private int startPage;
     private int startList;
     private int endPage;
     private boolean prev;
@@ -25,6 +28,7 @@ public class Pagination {
 
         this.pageCnt = (int) Math.ceil((double) listCnt / listSize);
         this.endPage = range * rangeSize;
+        this.startPage = (range - 1) * rangeSize;
         this.startList = (page - 1) * listSize;
         this.prev = range == 1 ? false : true;
         this.next = endPage > pageCnt ? false : true;
