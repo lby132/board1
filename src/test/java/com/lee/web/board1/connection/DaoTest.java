@@ -25,6 +25,7 @@ public class DaoTest {
     @Autowired
     private BoardDAO boardDAO;
 
+    @Autowired
     private BoardDAOImpl boardDAOImpl;
 
     @Test
