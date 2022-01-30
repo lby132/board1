@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lee.web.menu.memuMapper">
+<mapper namespace="com.lee.web.menu.MenuMapper">
 
-    <select id="getMenuList" resultType="com.lee.web.board1.model.menuVO">
+    <select id="getMenuList" resultType="com.lee.web.board1.menu.model.MenuVO">
         SELECT
             MID
         ,   CODE
@@ -17,7 +17,7 @@
         ORDER BY SORT_NUM DESC, CODE ASC
     </select>
 
-    <insert id="insertMenu" parameterType="com.lee.web.board1.model.menuVO">
+    <insert id="insertMenu" parameterType="com.lee.web.board1.menu.model.MenuVO">
         INSERT INTO TBL_MENU(CODE, CODENAME, SORT_NUM, COMMENT, REG_ID, REG_DT)
         VALUES(
             #{code}
@@ -29,7 +29,7 @@
         )
     </insert>
 
-    <update id="updateMenu" parameterType="com.lee.web.board1.model.menuVO">
+    <update id="updateMenu" parameterType="com.lee.web.board1.menu.model.MenuVO">
         UPDATE TBL_MENU SET
             CODENAME = #{codename}
             , COMMENT = #{comment}
