@@ -19,19 +19,41 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/idPwCheckList")
+    public String idPwCheck(@RequestParam String id
+                            ,@RequestParam int pw
+                            ,Model model) throws Exception {
+
+        if("abc".equals(id) && Integer.parseInt("123") == pw) {
+            model.addAttribute("id", id);
+            return "/idPwCheck";
+        } else {
+            return "redirect:/index";
+        }
+
+    }
+
     @RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
     public String getBoardList(Model model
     ,@RequestParam(required = false, defaultValue = "1") int page
     ,@RequestParam(required = false, defaultValue = "1") int range
     ) throws Exception {
-        int listCnt = boardService.getBoardListCnt();
 
-        Pagination pagination = new Pagination(page, range, listCnt);
+            int listCnt = boardService.getBoardListCnt();
 
-        model.addAttribute("pagination" ,pagination);
-        model.addAttribute("boardList", boardService.getBoardList(pagination));
-        return "board/boardList";
-    }
+            Pagination pagination = new Pagination(page, range, listCnt);
+
+            model.addAttribute("pagination", pagination);
+            model.addAttribute("boardList", boardService.getBoardList(pagination));
+            return "board/boardList";
+        }
+
+
 
     @RequestMapping(value = "/contentBoard", method = RequestMethod.GET)
     public String contentBoard(Model model, @RequestParam("bid") int bid) throws Exception {
